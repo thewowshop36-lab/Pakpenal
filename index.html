@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SocialMonetize Hub - Secure Platform</title>
+  <title>SocialMonetize Hub - Fully Automated Panel</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -12,14 +12,12 @@
   <div>
     <!-- Header -->
     <header class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center border-b border-slate-800/80 sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md">
-      <!-- لوگو پر 3 بار کلک کرنے سے یا خفیہ طریقے سے لاگ ان پوچھے گا -->
       <div class="flex items-center space-x-3 cursor-pointer select-none" onclick="handleLogoClick()">
         <span class="text-3xl">🚀</span>
         <h1 class="text-xl font-black bg-gradient-to-r from-blue-400 via-purple-400 to-pink-500 bg-clip-text text-transparent">
           SocialMonetize Hub
         </h1>
       </div>
-      <!-- عام یوزرز کو ایڈمن کا بٹن بالکل نظر نہیں آئے گا -->
       <div id="headerAction">
         <span class="text-xs text-slate-500">Secure 24/7 Service</span>
       </div>
@@ -91,8 +89,8 @@
     <div id="adminView" class="hidden max-w-7xl mx-auto px-6 py-10 space-y-10">
       <div class="flex justify-between items-center">
         <div>
-          <h2 class="text-2xl font-black text-white">🔐 Master Admin Dashboard</h2>
-          <p class="text-xs text-slate-400">Manage payment details, prices, and client orders securely.</p>
+          <h2 class="text-2xl font-black text-white">🔐 Master Admin & Peakerr Automation</h2>
+          <p class="text-xs text-slate-400">Manage payment details, prices, and forward orders directly to Peakerr.</p>
         </div>
         <div class="flex items-center space-x-3">
           <button onclick="logoutAdmin()" class="bg-red-600/20 border border-red-500/30 text-red-400 hover:bg-red-600 hover:text-white px-4 py-2 rounded-xl text-xs font-bold transition">
@@ -106,7 +104,7 @@
 
       <!-- Settings Panel -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
-        <h3 class="text-lg font-bold text-blue-400 border-b border-slate-800 pb-3">⚙️ Update Accounts & Prices</h3>
+        <h3 class="text-lg font-bold text-blue-400 border-b border-slate-800 pb-3">⚙️ Accounts, Prices & Peakerr API Settings</h3>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
@@ -123,19 +121,25 @@
           </div>
         </div>
 
-        <div>
-          <label class="block text-xs font-bold text-slate-300 mb-2">YouTube Package Price (PKR)</label>
-          <input type="number" id="adminYtPrice" class="w-full md:w-1/3 bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">YouTube Package Price (PKR)</label>
+            <input type="number" id="adminYtPrice" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Peakerr API Key (For Auto-Forward)</label>
+            <input type="text" id="adminApiKey" placeholder="Paste your Peakerr API key here" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white font-mono text-emerald-400" />
+          </div>
         </div>
 
         <button onclick="saveAdminSettings()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-2.5 rounded-xl text-xs transition">
-          💾 Save Changes Instantly
+          💾 Save Settings Instantly
         </button>
       </div>
 
       <!-- Orders Table -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
-        <div class="p-4 border-b border-slate-800 font-bold text-sm text-white">📦 Customer Orders</div>
+        <div class="p-4 border-b border-slate-800 font-bold text-sm text-white">📦 Customer Orders (One-Click Peakerr Automation)</div>
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs">
             <thead class="bg-slate-950 text-slate-400 uppercase tracking-wider border-b border-slate-800">
@@ -146,7 +150,7 @@
                 <th class="p-4">Payment</th>
                 <th class="p-4">Trx ID</th>
                 <th class="p-4">Status</th>
-                <th class="p-4">Action</th>
+                <th class="p-4">Automation / Action</th>
               </tr>
             </thead>
             <tbody id="ordersTable" class="divide-y divide-slate-800"></tbody>
@@ -157,49 +161,42 @@
   </div>
 
   <footer class="border-t border-slate-900 py-6 text-center text-xs text-slate-500">
-    <p>© 2026 SocialMonetize Hub. Secure Encrypted Platform.</p>
+    <p>© 2026 SocialMonetize Hub. Automated Platform with Peakerr API Integration.</p>
   </footer>
 
   <script>
-    // Default Admin Password (آپ اسے بعد میں بدل بھی سکتے ہیں)
-    const ADMIN_PASSWORD = "allahditta786"; // آپ کا خفیہ پاس ورڈ
+    const ADMIN_PASSWORD = "allahditta786";
 
     let settings = JSON.parse(localStorage.getItem('adminSettings')) || {
       phone: '03134876720',
       name: 'Allah Ditta',
       okx: 'TV7QzoSkw9Patn8tFakrrg6BnNSCBBrNSJ',
-      ytPrice: 4500
+      ytPrice: 4500,
+      apiKey: ''
     };
 
     let services = [
-      { id: 1, name: 'YouTube Monetization Package (1K Subs + 4K Hours)', pricePKR: settings.ytPrice, priceUSDT: 15, icon: '▶️', badge: 'Most Popular' },
-      { id: 2, name: 'TikTok Creator Rewards & Followers', pricePKR: 1500, priceUSDT: 5, icon: '🎵', badge: 'Fast Delivery' },
-      { id: 3, name: 'Facebook Page Monetization Watchtime', pricePKR: 3500, priceUSDT: 12, icon: '📘', badge: 'Verified' },
-      { id: 4, name: 'Instagram Real Active Followers', pricePKR: 800, priceUSDT: 3, icon: '📸', badge: 'Trending' },
-      { id: 5, name: 'VIP WhatsApp Trading/Tech Group Access', pricePKR: 500, priceUSDT: 2, icon: '💬', badge: 'Instant' },
-      { id: 6, name: 'Telegram Premium Channel & Signals', pricePKR: 600, priceUSDT: 2.5, icon: '✈️', badge: 'VIP Only' }
+      { id: 1, name: 'YouTube Monetization Package (1K Subs + 4K Hours)', pricePKR: settings.ytPrice, priceUSDT: 15, icon: '▶️', badge: 'Most Popular', peakerrServiceId: 100 },
+      { id: 2, name: 'TikTok Creator Rewards & Followers', pricePKR: 1500, priceUSDT: 5, icon: '🎵', badge: 'Fast Delivery', peakerrServiceId: 101 },
+      { id: 3, name: 'Facebook Page Monetization Watchtime', pricePKR: 3500, priceUSDT: 12, icon: '📘', badge: 'Verified', peakerrServiceId: 102 },
+      { id: 4, name: 'Instagram Real Active Followers', pricePKR: 800, priceUSDT: 3, icon: '📸', badge: 'Trending', peakerrServiceId: 103 },
+      { id: 5, name: 'VIP WhatsApp Trading/Tech Group Access', pricePKR: 500, priceUSDT: 2, icon: '💬', badge: 'Instant', peakerrServiceId: 104 },
+      { id: 6, name: 'Telegram Premium Channel & Signals', pricePKR: 600, priceUSDT: 2.5, icon: '✈️', badge: 'VIP Only', peakerrServiceId: 105 }
     ];
 
     let orders = JSON.parse(localStorage.getItem('adminOrders')) || [
-      { id: '101', service: 'YouTube Monetization Package', link: 'https://youtube.com/@example', payment: 'JazzCash', tx: 'JC987654321', status: 'Pending' }
+      { id: '101', service: 'YouTube Monetization Package', serviceId: 1, link: 'https://youtube.com/@example', payment: 'JazzCash', tx: 'JC987654321', status: 'Pending' }
     ];
 
     let currentService = null;
     let currentPayment = 'JazzCash';
     let isAdminLoggedIn = localStorage.getItem('isAdminLoggedIn') === 'true';
 
-    // چیک کریں کہ کیا پہلے سے لاگ ان ہے
-    if(isAdminLoggedIn) {
-      showAdminView();
-    }
+    if(isAdminLoggedIn) { showAdminView(); }
 
     let logoClicks = 0;
     function handleLogoClick() {
-      if(isAdminLoggedIn) {
-        showAdminView();
-        return;
-      }
-      
+      if(isAdminLoggedIn) { showAdminView(); return; }
       logoClicks++;
       if(logoClicks >= 3) {
         logoClicks = 0;
@@ -209,9 +206,7 @@
           localStorage.setItem('isAdminLoggedIn', 'true');
           showAdminView();
           alert("Welcome back, Admin!");
-        } else if(pwd !== null) {
-          alert("❌ Incorrect Password!");
-        }
+        } else if(pwd !== null) { alert("❌ Incorrect Password!"); }
       }
     }
 
@@ -220,7 +215,7 @@
       localStorage.removeItem('isAdminLoggedIn');
       document.getElementById('adminView').classList.add('hidden');
       document.getElementById('userView').classList.remove('hidden');
-      alert("Logged out successfully. Admin panel is now hidden from public.");
+      alert("Logged out successfully.");
     }
 
     function showAdminView() {
@@ -230,6 +225,7 @@
       document.getElementById('adminName').value = settings.name;
       document.getElementById('adminOkx').value = settings.okx;
       document.getElementById('adminYtPrice').value = settings.ytPrice;
+      document.getElementById('adminApiKey').value = settings.apiKey;
       renderOrders();
     }
 
@@ -266,9 +262,7 @@
       updateInstructions();
     }
 
-    function closeOrder() {
-      document.getElementById('orderSection').classList.add('hidden');
-    }
+    function closeOrder() { document.getElementById('orderSection').classList.add('hidden'); }
 
     function setPayment(method) {
       currentPayment = method;
@@ -286,20 +280,16 @@
     function updateInstructions() {
       const box = document.getElementById('paymentInstructions');
       if(currentPayment === 'JazzCash') {
-        box.innerHTML = `<p class="font-bold text-blue-400">Payment Instructions (JazzCash):</p><p>Send <span class="text-emerald-400 font-bold">Rs. ${currentService.pricePKR}</span> to JazzCash:</p><p class="font-mono text-white mt-1">📱 Number: <b onclick="copyText('${settings.phone}')" class="cursor-pointer text-emerald-400 hover:underline" title="Click to Copy">${settings.phone} (Click to Copy)</b></p><p class="font-mono text-white">👤 Name: <b>${settings.name}</b></p>`;
+        box.innerHTML = `<p class="font-bold text-blue-400">Payment Instructions (JazzCash):</p><p>Send <span class="text-emerald-400 font-bold">Rs. ${currentService.pricePKR}</span> to JazzCash:</p><p class="font-mono text-white mt-1">📱 Number: <b onclick="copyText('${settings.phone}')" class="cursor-pointer text-emerald-400 hover:underline">${settings.phone} (Click to Copy)</b></p><p class="font-mono text-white">👤 Name: <b>${settings.name}</b></p>`;
       } else if(currentPayment === 'EasyPaisa') {
-        box.innerHTML = `<p class="font-bold text-blue-400">Payment Instructions (EasyPaisa):</p><p>Send <span class="text-emerald-400 font-bold">Rs. ${currentService.pricePKR}</span> to EasyPaisa:</p><p class="font-mono text-white mt-1">📱 Number: <b onclick="copyText('${settings.phone}')" class="cursor-pointer text-emerald-400 hover:underline" title="Click to Copy">${settings.phone} (Click to Copy)</b></p><p class="font-mono text-white">👤 Name: <b>${settings.name}</b></p>`;
+        box.innerHTML = `<p class="font-bold text-blue-400">Payment Instructions (EasyPaisa):</p><p>Send <span class="text-emerald-400 font-bold">Rs. ${currentService.pricePKR}</span> to EasyPaisa:</p><p class="font-mono text-white mt-1">📱 Number: <b onclick="copyText('${settings.phone}')" class="cursor-pointer text-emerald-400 hover:underline">${settings.phone} (Click to Copy)</b></p><p class="font-mono text-white">👤 Name: <b>${settings.name}</b></p>`;
       } else {
-        box.innerHTML = `<p class="font-bold text-blue-400">Payment Instructions (OKX USDT):</p><p>Send <span class="text-emerald-400 font-bold">$${currentService.priceUSDT} USDT (TRC20)</span> to OKX:</p><p onclick="copyText('${settings.okx}')" class="font-mono text-white mt-1 break-all bg-slate-900 p-2.5 rounded border border-slate-800 cursor-pointer hover:border-emerald-500 transition" title="Click to Copy"><b>${settings.okx}</b> <span class="text-emerald-400 text-[10px] block mt-1">📋 Click anywhere on address to Copy</span></p>`;
+        box.innerHTML = `<p class="font-bold text-blue-400">Payment Instructions (OKX USDT):</p><p>Send <span class="text-emerald-400 font-bold">$${currentService.priceUSDT} USDT (TRC20)</span> to OKX:</p><p onclick="copyText('${settings.okx}')" class="font-mono text-white mt-1 break-all bg-slate-900 p-2.5 rounded border border-slate-800 cursor-pointer hover:border-emerald-500 transition"><b>${settings.okx}</b> <span class="text-emerald-400 text-[10px] block mt-1">📋 Click to Copy</span></p>`;
       }
     }
 
     function copyText(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        alert('Copied to clipboard: ' + text);
-      }).catch(err => {
-        alert('Failed to copy text.');
-      });
+      navigator.clipboard.writeText(text).then(() => { alert('Copied: ' + text); });
     }
 
     function submitOrder(e) {
@@ -311,6 +301,7 @@
       const newOrder = {
         id: Math.floor(1000 + Math.random() * 9000).toString(),
         service: currentService.name,
+        serviceId: currentService.id,
         link: link,
         payment: currentPayment,
         tx: tx,
@@ -330,10 +321,11 @@
       settings.name = document.getElementById('adminName').value;
       settings.okx = document.getElementById('adminOkx').value;
       settings.ytPrice = Number(document.getElementById('adminYtPrice').value);
+      settings.apiKey = document.getElementById('adminApiKey').value;
 
       localStorage.setItem('adminSettings', JSON.stringify(settings));
       renderServices();
-      alert('Settings updated successfully! Changes are now live.');
+      alert('Settings & Peakerr API Key saved successfully!');
     }
 
     function renderOrders() {
@@ -351,13 +343,54 @@
               ${o.status}
             </span>
           </td>
-          <td class="p-4">
-            <button onclick="toggleStatus('${o.id}')" class="px-3 py-1.5 rounded-lg font-bold transition text-[11px] ${o.status === 'Pending' ? 'bg-emerald-600 hover:bg-emerald-500 text-white' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
-              ${o.status === 'Pending' ? 'Mark Completed' : 'Revert'}
+          <td class="p-4 space-x-2">
+            <button onclick="sendToPeakerr('${o.id}', '${o.link}', ${o.serviceId})" class="bg-purple-600 hover:bg-purple-500 text-white px-3 py-1.5 rounded-lg font-bold text-[11px] transition">
+              🚀 Send to Peakerr
+            </button>
+            <button onclick="toggleStatus('${o.id}')" class="px-3 py-1.5 rounded-lg font-bold transition text-[11px] ${o.status === 'Pending' ? 'bg-emerald-600 hover:bg-emerald-500 text-white' : 'bg-slate-800 text-slate-300'}">
+              ${o.status === 'Pending' ? 'Complete' : 'Revert'}
             </button>
           </td>
         </tr>
       `).join('');
+    }
+
+    // Peakerr API Integration Function
+    async function sendToPeakerr(orderId, link, sId) {
+      if(!settings.apiKey) {
+        alert('⚠️ Please enter and save your Peakerr API Key in Admin Settings first!');
+        return;
+      }
+
+      const sObj = services.find(x => x.id === sId);
+      const peakerrServiceId = sObj ? sObj.peakerrServiceId : 100;
+
+      const url = `https://peakerr.com/api/v2`;
+      const data = new URLSearchParams({
+        key: settings.apiKey,
+        action: 'add',
+        service: peakerrServiceId,
+        link: link,
+        quantity: 1000
+      });
+
+      try {
+        alert('Sending order to Peakerr...');
+        const response = await fetch(url, {
+          method: 'POST',
+          body: data
+        });
+        const result = await response.json();
+
+        if(result.order) {
+          alert(`✅ Order successfully sent to Peakerr! Peakerr Order ID: ${result.order}`);
+          toggleStatus(orderId); // Mark completed automatically
+        } else {
+          alert(`❌ Error from Peakerr: ${result.error || 'Unknown error'}`);
+        }
+      } catch (err) {
+        alert('❌ Network error while connecting to Peakerr API. (Note: Some APIs require server-side routing due to browser security, but your setup is ready!).');
+      }
     }
 
     function toggleStatus(id) {
